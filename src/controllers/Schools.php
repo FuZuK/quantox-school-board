@@ -63,7 +63,9 @@ class Schools extends Base
         }
 
         $stmt = $connection->prepare(
-            'SELECT * FROM `school_students` WHERE `school_id` = ? ' .
+            'SELECT *, (SELECT COUNT(*) FROM `school_student_grades` ' .
+            'WHERE `school_student_id` = `school_students`.`id`) AS `grades_number` ' .
+            'FROM `school_students` WHERE `school_id` = ? ' .
             'ORDER BY first_name ASC, last_name ASC'
         );
         $stmt->execute([ $school['id'] ]);

@@ -18,5 +18,12 @@ return [
             'id' => 'csmb',
             'name' => 'CSMB'
         ]
+    ],
+    'grades' => [
+        'range' => [
+            'from' => 1,
+            'to' => 12
+        ],
+        'max' => 4
     ]
 ];

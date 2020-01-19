@@ -10,5 +10,7 @@ return [
     'GET /schools/:id/students/create' => 'SchoolStudents.create',
     'POST /schools/:id/students/create' => 'SchoolStudents.insert',
     'POST /schools/:school_id/students/:student_id/delete' => 'SchoolStudents.delete',
-    'GET /schools/:school_id/students/:student_id' => 'SchoolStudents.show'
+    'GET /schools/:school_id/students/:student_id' => 'SchoolStudents.show',
+    'GET /schools/:school_id/students/:student_id/grades/create' => 'SchoolStudentGrades.create',
+    'POST /schools/:school_id/students/:student_id/grades/create' => 'SchoolStudentGrades.insert'
 ];
