@@ -83,14 +83,14 @@ class Application
     }
 
     private static function getRouteRegex($routeUri) {
-        $regex = preg_replace('/:[a-zA-Z0-9]*/', '([a-zA-Z0-9]*)', $routeUri);
+        $regex = preg_replace('/:[a-zA-Z0-9\-_]*/', '([a-zA-Z0-9]*)', $routeUri);
         $regex = preg_replace('/\//', '\/', $regex);
 
         return '^' . $regex . '$';
     }
 
     private static function getRoutePlaceholders($routeUri) {
-        if (preg_match_all('/:([a-zA-Z0-9]*)/', $routeUri, $matches)) {
+        if (preg_match_all('/:([a-zA-Z0-9\-_]*)/', $routeUri, $matches)) {
             return array_values($matches[1]);
         }
 
