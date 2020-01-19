@@ -71,6 +71,24 @@ class Schools extends Base
         $stmt->execute([ $school['id'] ]);
         $students = $stmt->fetchAll();
 
+        $board = current(array_filter($this->config['boards'], function ($board) use ($school) {
+            return $board['id'] === $school['board'];
+        }));
+        $result_detector = new $board['result_detector'];
+
+        $students = array_map(function ($student) use ($connection, $result_detector) {
+            $stmt = $connection->prepare(
+                'SELECT grade FROM `school_student_grades` WHERE `school_student_id` = ?'
+            );
+            $stmt->execute([ $student['id'] ]);
+            $grades = array_column($stmt->fetchAll(), 'grade');
+
+            $student['grades'] = $grades;
+            $student['result'] = $result_detector->detect($grades);
+
+            return $student;
+        }, $students);
+
         return $this->view('schools/show', [
             'school' => $school,
             'students' => $students

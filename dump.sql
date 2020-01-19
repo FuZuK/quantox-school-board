@@ -28,3 +28,5 @@ CREATE TABLE `school_student_grades` (
   CONSTRAINT `school_student_grades_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`),
   CONSTRAINT `school_student_grades_ibfk_2` FOREIGN KEY (`school_student_id`) REFERENCES `school_students` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `school_students` DROP COLUMN `board`;

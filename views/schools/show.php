@@ -7,6 +7,7 @@ include __DIR__ . '/../header.php';
         <th>First name</th>
         <th>Last name</th>
         <th># grades</th>
+        <th>Result</th>
         <th>Actions</th>
     </tr>
     <?php foreach ($students as $student): ?>
@@ -14,6 +15,7 @@ include __DIR__ . '/../header.php';
             <td><?php echo htmlspecialchars($student['first_name']) ?></td>
             <td><?php echo htmlspecialchars($student['last_name']) ?></td>
             <td><?php echo $student['grades_number'] ?></td>
+            <td><?php echo $student['result'] ?></td>
             <td>
                 <a href="/schools/<?php echo $school['id'] ?>/students/<?php echo $student['id'] ?>" class="btn btn-primary">View</a>
                 <a href="/schools/<?php echo $school['id'] ?>/students/<?php echo $student['id'] ?>/grades/create" class="btn btn-success">Grade</a>

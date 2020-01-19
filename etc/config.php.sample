@@ -7,16 +7,20 @@ return [
         'port' => 3306,
         'user' => 'root',
         'password' => '',
-        'db_name' => 'quantox-school-board'
+        'db_name' => 'school-board'
     ],
     'boards' => [
         [
             'id' => 'csm',
-            'name' => 'CSM'
+            'name' => 'CSM',
+            'renderer' => \Boards\Renderers\CSM::class,
+            'result_detector' => \Boards\ResultDetectors\CSM::class
         ],
         [
             'id' => 'csmb',
-            'name' => 'CSMB'
+            'name' => 'CSMB',
+            'renderer' => \Boards\Renderers\CSMB::class,
+            'result_detector' => \Boards\ResultDetectors\CSMB::class
         ]
     ],
     'grades' => [

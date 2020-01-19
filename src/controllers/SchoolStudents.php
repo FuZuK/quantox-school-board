@@ -75,4 +75,40 @@ class SchoolStudents extends Base
 
         return $this->redirectWithMessage('/schools/' . $school['id'], 'Student successfully deleted');
     }
+
+    public function show($arguments)
+    {
+        $connection = \Database::getConnection();
+        $stmt = $connection->prepare('SELECT * FROM `schools` WHERE `id` = ?');
+        $stmt->execute([$arguments['school_id']]);
+        $school = $stmt->fetch();
+
+        if (!$school) {
+            return $this->redirectWithError('/', 'School is not found');
+        }
+
+        $stmt = $connection->prepare('SELECT * FROM `school_students` WHERE `school_id` = ? AND `id` = ?');
+        $stmt->execute([$arguments['school_id'], $arguments['student_id']]);
+        $student = $stmt->fetch();
+
+        if (!$student) {
+            return $this->redirectWithError('/', 'School student is not found');
+        }
+
+        $stmt = $connection->prepare('SELECT grade FROM `school_student_grades` WHERE `school_student_id` = ?');
+        $stmt->execute([ $student['id'] ]);
+        $grades = array_column($stmt->fetchAll(), 'grade');
+        $board = current(array_filter($this->config['boards'], function ($board) use ($school) {
+            return $board['id'] === $school['board'];
+        }));
+        $renderer = new $board['renderer'];
+        $result_detector = new $board['result_detector'];
+        $student['grades'] = $grades;
+        $student['average'] = array_sum($grades) / count($grades);
+        $student['result'] = $result_detector->detect($grades);
+
+        header('Content-type: ' . $renderer->getContentType());
+
+        return $renderer->renderStudent($student);
+    }
 }

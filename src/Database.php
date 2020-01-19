@@ -9,11 +9,15 @@ class Database
             throw new Exception('Connection is already initialized');
         }
 
-        static::$connection = new \PDO(
-            $driver . ':host=' . $host . ';port=' . $port . ';dbname=' .$db_name,
-            $user,
-            $password
-        );
+        if (!static::$connection) {
+            $connection = new \PDO(
+                $driver . ':host=' . $host . ';port=' . $port . ';dbname=' . $db_name,
+                $user,
+                $password
+            );
+            $connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+            static::$connection = $connection;
+        }
 
         return static::$connection;
     }
