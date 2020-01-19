@@ -1,0 +1,12 @@
+{
+    "name": "roman/quantox-school-board",
+    "authors": [
+        {
+            "name": "Roman Pukhliy",
+            "email": "pukhliyroman@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [ "src" ]
+    }
+}
