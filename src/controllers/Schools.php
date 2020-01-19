@@ -62,8 +62,16 @@ class Schools extends Base
             return $this->redirectWithError('/', 'School is not found');
         }
 
+        $stmt = $connection->prepare(
+            'SELECT * FROM `school_students` WHERE `school_id` = ? ' .
+            'ORDER BY first_name ASC, last_name ASC'
+        );
+        $stmt->execute([ $school['id'] ]);
+        $students = $stmt->fetchAll();
+
         return $this->view('schools/show', [
-            'school' => $school
+            'school' => $school,
+            'students' => $students
         ]);
     }
 
