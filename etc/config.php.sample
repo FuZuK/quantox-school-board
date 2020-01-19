@@ -8,5 +8,15 @@ return [
         'user' => 'root',
         'password' => '',
         'db_name' => 'quantox-school-board'
+    ],
+    'boards' => [
+        [
+            'id' => 'csm',
+            'name' => 'CSM'
+        ],
+        [
+            'id' => 'csmb',
+            'name' => 'CSMB'
+        ]
     ]
 ];

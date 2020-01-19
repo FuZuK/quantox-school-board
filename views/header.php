@@ -17,6 +17,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/schools/create">Create school</a>
+                </li>
             </ul>
         </div>
     </nav>
